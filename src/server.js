@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 
 require('dotenv').config();
+//console.log('JWT_SECRET:', process.env.JWT_SECRET);
 
 const connectDB = require('./config/db');
 
@@ -13,11 +14,13 @@ app.use(express.json());
 connectDB();
 
 // Import routes
+const authRoutes = require('./routes/authRoutes');
 const userRoutes = require('./routes/userRoutes');
 const companyRoutes = require('./routes/companyRoutes');
 const serviceRoutes = require('./routes/serviceRoutes');
 const appointmentRoutes = require('./routes/appointmentsRoutes');
 
+app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/companies', companyRoutes);
 app.use('/api/services', serviceRoutes);
