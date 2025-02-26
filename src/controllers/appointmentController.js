@@ -2,7 +2,15 @@ const Appointment = require('../models/Appointments');
 
 exports.getAppointments = async (req, res) => {
   try {
-    const appointments = await Appointment.find()
+    const query = {}
+
+    if (req.user.role === 'user') {
+      query.userId = req.user.id;
+    } else if (req.user.role === 'company') {
+      query.companyId = req.user.id;
+    }
+
+    const appointments = await Appointment.find(query)
       .populate('userId', 'name email')
       .populate('companyId', 'name')
       .populate('serviceId', 'name price');
