@@ -1,29 +1,28 @@
-const express = require('express');
-const cors = require('cors');
+import http from 'http'
+import expressConfig from './shared/express'
+import dotenv from 'dotenv';
+dotenv.config();
 
-require('dotenv').config();
+import connectDB from './config/db';
 
-const connectDB = require('./config/db');
-
-const app = express();
-app.use(cors());
-app.use(express.json());
+const app = expressConfig();
+const server = http.createServer(app)
 
 // Connect to MongoDB
 connectDB();
 
 // Import routes
-const authRoutes = require('./routes/authRoutes');
-const userRoutes = require('./routes/userRoutes');
-const companyRoutes = require('./routes/companyRoutes');
-const serviceRoutes = require('./routes/serviceRoutes');
-const appointmentRoutes = require('./routes/appointmentsRoutes');
+// import authRoutes from './routes/authRoutes';
+// import userRoutes from './routes/userRoutes';
+// import companyRoutes from './routes/companyRoutes';
+// import serviceRoutes from './routes/serviceRoutes';
+// import appointmentRoutes from './routes/appointmentsRoutes';
 
-app.use('/api/auth', authRoutes);
-app.use('/api/users', userRoutes);
-app.use('/api/companies', companyRoutes);
-app.use('/api/services', serviceRoutes);
-app.use('/api/appointments', appointmentRoutes);
+// app.use('/api/auth', authRoutes);
+// app.use('/api/users', userRoutes);
+// app.use('/api/companies', companyRoutes);
+// app.use('/api/services', serviceRoutes);
+// app.use('/api/appointments', appointmentRoutes);
 
 // Start the server
 const port = process.env.PORT || 5000;
