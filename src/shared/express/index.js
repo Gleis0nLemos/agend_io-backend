@@ -1,5 +1,6 @@
-import express from 'express'
+import express, { json } from 'express'
 import routes from '../../modules'
+import cors from 'cors'
 
 export default () => {
   const app = express()
