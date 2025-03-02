@@ -1,5 +1,5 @@
 import express, { json } from 'express'
-import routes from '../../modules'
+import routes from '../../api'
 import cors from 'cors'
 
 export default () => {
