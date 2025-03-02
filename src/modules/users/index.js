@@ -4,7 +4,7 @@ import auth from '../../shared/express/authMiddleware';
 
 const router = express.Router();
 
-router.get('/', auth, UserController.getUsers);
-router.post('/', auth, UserController.createUser);
+router.get('/', auth(), UserController.getUsers);
+router.post('/', auth(), UserController.createUser);
 
 export default router

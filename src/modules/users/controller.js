@@ -1,8 +1,8 @@
-import User, { find } from './model';
+import User from './model';
 class UserController {
     async getUsers(req, res) {
         try {
-            const users = await find();
+            const users = await User.find();
             res.json(users);
         } catch (error) {
             res.status(500).json({ message: error.message });
