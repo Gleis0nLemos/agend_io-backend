@@ -1,5 +1,4 @@
 import User, { find } from './model';
-
 class UserController {
     async getUsers(req, res) {
         try {
