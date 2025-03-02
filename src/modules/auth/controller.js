@@ -1,4 +1,4 @@
-import User, { findOne } from '../models/User';
+import User from '../users/model';
 import { hash, compare } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
 import config from '../../config';
@@ -10,7 +10,7 @@ class Auth {
             const { name, email, password, phone, role } = req.body;
 
             // Check if user already exists
-            const existingUser = await findOne({ email });
+            const existingUser = await User.findOne({ email });
 
             if (existingUser) {
                 return res.status(400).json({
@@ -47,7 +47,7 @@ class Auth {
             const { email, password } = req.body;
 
             // Check if user exists
-            const user = await findOne({ email});
+            const user = await User.findOne({ email});
             if (!user) {
                 return res.status(400).json({
                     message: 'User not found'
