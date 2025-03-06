@@ -10,6 +10,28 @@ class CompanyController {
         }
     }
 
+    async getCompaniesById(req, res) {
+        try {
+            const company = await Company.findById(req.params.id).populate(
+                'ownerId', 
+                'name email'
+            );
+
+            if (!company) {
+                return res.status(404).json({ 
+                    message: 'Company not found' 
+                });
+            }
+
+            res.json(company);
+            
+        } catch (error) {
+            res.status(500).json({
+                message: error.message
+            })
+        }
+    }
+
     async createCompany(req, res) {
         try {
             const company = new Company(req.body);
